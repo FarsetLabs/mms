@@ -22,6 +22,9 @@ from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
     url(r'^payment/', include('payment.urls', namespace='payment')),
 
+    # Join membership routes (e.g. /members/, /groups/)
+    url(r'^', include('membership.urls', namespace='membership')),
+
     url(r'^api-token-auth/', obtain_jwt_token),
 
     url(r'^admin/', admin.site.urls),
