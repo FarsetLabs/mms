@@ -1,0 +1,22 @@
+version: '2'
+services:
+    mms-ui:
+        build: ui
+        command: make watch
+        volumes:
+            - ./ui:/ui
+            - ./server:/server
+            - node-modules:/src/node_modules
+    mms-server:
+        build: server
+        command: make devserver
+        volumes:
+            - ./server:/server
+            - ./ui/dist:/server/frontend
+        ports:
+            - 0.0.0.0:8000:8000
+        environment:
+            VIRTUAL_HOST: farset-mms.docker
+volumes:
+    node-modules:
+        driver: local
